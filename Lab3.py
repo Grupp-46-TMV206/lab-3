@@ -11,7 +11,7 @@ Där Xc är % av bilar från Centralen, Landvetter, Uthyrning som är vid Centra
 
     Vn = (Cn, Ln, Un) = A*Vn^-1
 =>  [n = 0]
-=>  V1 = A*V0
+=>  V1 = A^1*V0
 =>  V2 = A*V1 = A*(A*V0) = A^2*V0
 =>  V3 = A*V2 = A*(A*V1) = A*(A*(A*V0) = A^3*V0, etc.
 =>  Vn = A^n*V0 //
