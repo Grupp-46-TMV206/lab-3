@@ -23,6 +23,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def car_distribution(p, init_state, weeks):
+    # keeps distribution values for each passing week
     dist = []
     state = init_state
     for _ in range(weeks+1):
@@ -36,6 +37,7 @@ p = np.array(([0.7, 0.1, 0.3],
               [0.2, 0.3, 0.5]))
 
 def simulation(state):
+    # plots distribution values over time
     weeks = [10**n for n in range(6)]
     distribution = car_distribution(p, state, max(weeks))
 
@@ -51,6 +53,7 @@ def simulation(state):
     plt.grid()
     plt.show()
 
+# testers - 0.33/0.33/0.33, 1/0/0, 0/1/0 and 0/0/1
 equal_init = np.array([1/3, 1/3, 1/3])
 simulation(equal_init)
 
