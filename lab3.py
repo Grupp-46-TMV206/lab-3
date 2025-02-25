@@ -1,31 +1,31 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 
-"""
-Satan vilken galen fråga:
-På Centralen är 70% kvar veckan 2, 10% finns då på Landvetter och 20% är uthyrda
-För Landvetter: 60% kvar, 10% på Centralen och 30% uthyrda
-Av de som är uthyrda i början av en vecka är 50% det veckan därpå: 30% på Centralen och 20% på Landvetter
 
-c_n är antalet bilar på Centralen  vecka n
-l_n är antalet bilar på Landvetter vecka n
-u_n är antalet uthyrda bilar       vecka n
-"""
 
 # a)
 """
-v0 = [a, b, c] 
+v0 = [c0, 
+      l0, 
+      u0] 
+
 To compute v1 the following calculation would be used:
-v1 = np.array([v0[0] * 0.7 + v0[1] * 0.1 + v0[2] * 0.3, 
-                v0[0] * 0.1 + v0[1] * 0.6 + v0[2] * 0.2,
-                v0[0] * 0.2 + v0[1] * 0.3 + v0[2] * 0.5])
+v1 = [c0 * 0.7 + l0 * 0.1 + u0 * 0.3, 
+      c0 * 0.1 + l0 * 0.6 + u0 * 0.2,
+      c0 * 0.2 + l0 * 0.3 + u0 * 0.5]
 
-This gives us the following 3x3 matrix
-A = np.array([[0.7, 0.1, 0.3], 
-                [0.1, 0.6, 0.2],
-                [0.2, 0.3, 0.5]])
+To compute v2 and so on we just multiply the previous vector by A
 
+By the calculation of v1
+we see that A is written as
+A = [[0.7, 0.1, 0.3], 
+     [0.1, 0.6, 0.2],
+     [0.2, 0.3, 0.5]]
+
+So, for the expressions we get:
+v_1 = A * v0
+v_2 = A * v1 = A * A * v0 = A^2 * v0
+v_n = A^n * v0
 """
    
 
@@ -35,11 +35,12 @@ def distribution(A, v0, n):
     vs = np.zeros((3, n+1))
     # Set first column of matrix to v0
     vs[:, 0] = v0
-    # Recursively compute the rerst of the matrix 
+
+    # Recursively compute the rest of the matrix
     # using the formula v_k = A * v_k-1
     for k in range(1, n+1):
         vs[:, k] = np.matmul(A, vs[:, k-1])
-    
+ 
     plt.xlabel("# of weeks")
     plt.ylabel("Fraction")
 
@@ -49,7 +50,8 @@ def distribution(A, v0, n):
 
 def show_plot(vs):
 
-    weeks = [1, 10, 100, 1000, 10000, 100000]
+    weeks = [10**n for n in range(6)]
+
 
     # Draw dots of the selected weeks
     plt.scatter(weeks, vs[0, weeks], label = "Centralen")
