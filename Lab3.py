@@ -18,7 +18,6 @@ Där Xc är % av bilar från Centralen, Landvetter, Uthyrning som är vid Centra
 """
 
 # (b)
-
 import numpy as np
 import matplotlib.pyplot as plt
 
